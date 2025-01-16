@@ -62,9 +62,9 @@ function App() {
 
 
   const [invaderCards, setInvaderCards] = useState<{ [key: string]: string[] }>({
-    "1": ["W", "J", "S", "M"],
-    "2": ["W (E)", "J (E)", "S (E)", "M (E)", "C"],
-    "3": ["W+J", "J+S", "S+W", "M+W", "M+S", "M+J"],
+    1: ["W", "J", "S", "M"],
+    2: ["W (E)", "J (E)", "S (E)", "M (E)", "C"],
+    3: ["W+J", "J+S", "S+W", "M+W", "M+S", "M+J"],
   });
 
   // Handles input change and updates the value
@@ -112,23 +112,24 @@ function App() {
         3: deck.filter((card) => card === "3").length,
       }
       const stageCards = {
-        1: _.sampleSize(invaderCards["1"], stageCounts[1]),
-        2: _.sampleSize(invaderCards["2"], stageCounts[2]),
-        3: _.sampleSize(invaderCards["3"], stageCounts[3]),
+        1: _.sampleSize(invaderCards[1], stageCounts[1]),
+        2: _.sampleSize(invaderCards[2], stageCounts[2]),
+        3: _.sampleSize(invaderCards[3], stageCounts[3]),
       }
-      const cardCounters = { 1: 0, 2: 0, 3: 0 };
+
+      const cardCounters = { 1: -1, 2: -1, 3: -1 };
       const selectedDeck: string[] = deck.map((cardType) => {
         if (cardType === "1") {
-          cardCounters[1] ++;
+          cardCounters[1]++;
           return stageCards[1][cardCounters[1]];
         }
         if (cardType === "2") {
-          cardCounters[2] ++;
+          cardCounters[2]++;
           return stageCards[2][cardCounters[2]];
         }
         if (cardType === "3") {
-          cardCounters[3] ++;
-          return stageCards[2][cardCounters[3]];
+          cardCounters[3]++;
+          return stageCards[3][cardCounters[3]];
         }
         throw new Error("Invalid card type"); 
       });
