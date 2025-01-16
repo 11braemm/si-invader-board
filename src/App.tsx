@@ -11,7 +11,7 @@ function App() {
   const [fearInputValue, setFearInputValue] = useState('2,4,3');
   const [discard, setDiscard] = useState<string[]>([]);
   const [blightedIsland, setBlightedIsland] = useState(false);
-  const [fearDeck, setFearDeck] = useState<{ [key: number]: number }>({1: 0, 2: 0, 3: 0});
+  const [fearDeck, setFearDeck] = useState<{ [key: number]: number }>({ 1: 0, 2: 0, 3: 0 });
   const [terrorLevel, setTerrorLevel] = useState<number>(1);
 
 
@@ -25,7 +25,7 @@ function App() {
       alert("You've gained a fear card!")
     }
   }
-  , [fear]);
+    , [fear]);
 
   useEffect(() => {
     if (fearDeck[terrorLevel] === 0 && setup) {
@@ -33,14 +33,14 @@ function App() {
       setTerrorLevel(terrorLevel + 1);
     }
   }
-  , [fearDeck]);
+    , [fearDeck]);
 
   useEffect(() => {
     if (terrorLevel === 4 && setup) {
       alert(`You Win!`)
     }
   }
-  , [terrorLevel]);
+    , [terrorLevel]);
 
 
   useEffect(() => {
@@ -48,9 +48,9 @@ function App() {
       alert("You lose :(")
     }
   }
-  , [blight]);
+    , [blight]);
 
-  
+
   useEffect(() => {
     if (blight === 0 && !blightedIsland && setup) {
       alert("Blighted Island!")
@@ -58,7 +58,7 @@ function App() {
       setBlight(10);
     }
   }
-  , [blight]);
+    , [blight]);
 
 
   const [invaderCards, setInvaderCards] = useState<{ [key: string]: string[] }>({
@@ -80,7 +80,7 @@ function App() {
       alert("You lose :(")
     }
   }
-  , [invaderDeck]);
+    , [invaderDeck]);
 
   const advanceInvaderCards = () => {
     // Take the first card from selectedDeck and add it to the discard list
@@ -88,7 +88,7 @@ function App() {
 
     // Update selectedDeck (shift forward) and discard
     setInvaderDeck(remainingCards);
-    setDiscard((prevDiscard: string[]) => [firstCard, ...prevDiscard]); 
+    setDiscard((prevDiscard: string[]) => [firstCard, ...prevDiscard]);
   };
 
   // Function to move cards backward by taking the last card from the discard list
@@ -102,7 +102,7 @@ function App() {
     setInvaderDeck((prevSelectedDeck: string[]) => [lastCard, ...prevSelectedDeck]); // Add the card to the start of selectedDeck
     setDiscard(remainingDiscard); // Remove the card from discard
   };
-  
+
   const handleSetup = () => {
     try {
       const deck = inputValue.split(",")
@@ -131,13 +131,13 @@ function App() {
           cardCounters[3]++;
           return stageCards[3][cardCounters[3]];
         }
-        throw new Error("Invalid card type"); 
+        throw new Error("Invalid card type");
       });
       selectedDeck.unshift("");
       selectedDeck.unshift("");
 
       const fearDeck = fearInputValue.split(",").map((fearCard) => parseInt(fearCard));
-      setFearDeck({1: fearDeck[0], 2: fearDeck[1], 3: fearDeck[2]});
+      setFearDeck({ 1: fearDeck[0], 2: fearDeck[1], 3: fearDeck[2] });
 
       setInvaderDeck(selectedDeck);
       setSetup(true);
